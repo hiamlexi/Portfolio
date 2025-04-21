@@ -18,7 +18,7 @@ const HomeInfo = ({ currentStage }) => {
     return (
       <div className='info-box'>
         <p className='font-medium sm:text-xl text-center'>
-         PLaceholder <br /> Placeholder
+         Curious? <br /> Learn more about me and my work
         </p>
 
         <Link to='/about' className='neo-brutalism-white neo-btn'>
@@ -33,11 +33,11 @@ const HomeInfo = ({ currentStage }) => {
     return (
       <div className='info-box'>
         <p className='font-medium text-center sm:text-xl'>
-          Placeholder <br /> Placeholder
+           <br /> Visit my projects
+
         </p>
 
         <Link to='/projects' className='neo-brutalism-white neo-btn'>
-          Visit my portfolio
           <img src={arrow} alt='arrow' className='w-4 h-4 object-contain' />
         </Link>
       </div>
