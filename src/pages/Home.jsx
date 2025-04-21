@@ -19,21 +19,16 @@ const Home = () => {
 
   const [isPlayingMusic, setIsPlayingMusic] = useState(false);
 
-  const toggleMusic = async () => {
-    const audio = audioRef.current;
-
-    if (!isPlayingMusic) {
-      try {
-        await audio.play();
-        setIsPlayingMusic(true);
-      } catch (err) {
-        console.warn("Autoplay blocked:", err);
-      }
-    } else {
-      audio.pause();
-      setIsPlayingMusic(false);
+  useEffect(() => {
+    if (isPlayingMusic) {
+      audioRef.current.play();
     }
-  };
+
+    return () => {
+      audioRef.current.pause();
+    };
+  }, [isPlayingMusic]);
+
 
   const adjustIslandForScreenSize = () => {
     let screenScale = null;
@@ -122,13 +117,12 @@ const Home = () => {
           />
         </Suspense>
       </Canvas>
-
-      <div className="absolute bottom-2 left-2">
+      <div className='absolute bottom-2 left-2'>
         <img
-          src={isPlayingMusic ? soundon : soundoff}
-          alt="jukebox"
-          onClick={toggleMusic}
-          className="w-10 h-10 cursor-pointer object-contain"
+          src={!isPlayingMusic ? soundoff : soundon}
+          alt='jukebox'
+          onClick={() => setIsPlayingMusic(!isPlayingMusic)}
+          className='w-10 h-10 cursor-pointer object-contain'
         />
       </div>
     </section>
