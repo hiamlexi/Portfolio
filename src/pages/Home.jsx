@@ -1,4 +1,4 @@
-import { Suspense, useRef, useState } from "react";
+import { Suspense, useRef, useState,useEffect } from "react";
 import { Canvas } from "@react-three/fiber";
 import Loader from "../components/Loader";
 import HomeInfo from "../components/Homeinfo";
@@ -49,6 +49,24 @@ const Home = () => {
     return [screenScale, screenPostion, rotation];
   };
 
+  useEffect(() => {
+    const handleFirstClick = async () => {
+      try {
+        await audioRef.current.play();
+        setIsPlayingMusic(true);
+        document.removeEventListener('click', handleFirstClick);
+      } catch (err) {
+        console.warn('Autoplay blocked or failed:', err);
+      }
+    };
+  
+    document.addEventListener('click', handleFirstClick);
+  
+    return () => {
+      document.removeEventListener('click', handleFirstClick);
+    };
+  }, []);
+  
   const adjustPlaneForScreenSize = () => {
     let screenScale, screenPosition;
 
