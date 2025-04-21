@@ -170,4 +170,55 @@ export const socialLinks = [
 ];
 
 export const projects = [
+    {
+        iconUrl: python,
+        theme: 'btn-back-red',
+        name: 'VS Code extension for requirement management tool',
+        description:'T-Reqs is a tool support for managing requirements in large-scale agile system development, a text-based requirements management solution based on the git version control system by CLI. Together we bring it in the form of a VS Code extension with friendly GUI.',
+        //[TODO] add link to the project repo when it published
+        link: 'https://marketplace.visualstudio.com/items?itemName=treqs-vscode.treqs-vscode',
+    },
+
+    {
+        iconUrl: javascript,
+        theme: 'btn-back-pink',
+        name: 'This porfolio website',
+        description:'This porpfolio website is built using React.js, Three.js and Tailwind CSS. It showcases my projects, skills, and experiences. The website is designed to be responsive and user-friendly.',
+        //[TODO] add link to the project repo when it published
+        link: '',
+    },
+
+    {
+        iconUrl: c1,
+        theme: 'btn-back-blue',
+        name: 'Self driving mini vehicles (in a data driven way)',
+        description:'A project that aims to build a self-driving mini vehicle using Arduino and C/C++. The project focuses on data-driven approaches to enhance the vehicle\'s navigation and decision-making capabilities.',
+        descriptionDetails: 'The vehicle is equipped with sensors and actuators to perceive its environment and make real-time decisions. The original repository is in GitLab.',
+        link: 'https://github.com/hiamlexi/self-driving-vehicles-in-a-data-driven-way',
+    },
+
+    {
+        iconUrl: c1 ,
+        theme: 'btn-back-yellow',
+        name: 'A Hand-gesture controlled mini-car',
+        description:'A project to develope a hand-gesture-controlled car with a mobile app interface',
+        link: 'https://github.com/hiamlexi/Hand-gesture-controlled-mini-car-MQTT-ARDUINO-C--Android-Studio',
+    },
+
+    
+    {
+        iconUrl: java ,
+        theme: 'btn-back-purple',
+        name: 'A minigame in Java',
+        description:'A project to develop a fully functioning Snake Game',
+        link: 'https://github.com/hiamlexi/Snake-game-Java-Gradle-',
+    },
+
+    {
+        iconUrl: react ,
+        theme: 'btn-back-violet',
+        name: 'Dental appointment management system',
+        description:'A dental appointment management system designed with a microservices architecture that has modularity and scalability. MERN stack is used for this project and it also shows the architecture design of the system to handle peak load.',
+        link: 'https://github.com/hiamlexi/Snake-game-Java-Gradle-',
+    },
 ];
