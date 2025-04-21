@@ -112,7 +112,7 @@ const Contact = () => {
               name="message"
               rows="4"
               className="textarea"
-              placeholder="Say hi here to connect or just tell me some random facts ..."
+              placeholder="Say hi here to connect or just type some random thing here to watch the fox walking...😃"
               value={form.message}
               onChange={handleChange}
               onFocus={handleFocus}
