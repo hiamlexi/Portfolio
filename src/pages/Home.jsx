@@ -2,19 +2,19 @@ import { Suspense, useRef, useState, useEffect } from 'react';
 import { Canvas } from '@react-three/fiber';
 import Loader from '../components/Loader';
 import HomeInfo from '../components/Homeinfo';
-import LowpolyFox from "../models/LowpolyFox";
+import LowpolyFox from '../models/LowpolyFox';
 import SkyBox from '../models/SkyBox';
-
-import Bird from '../models/Bird';
-import Plane from '../models/Plane';
-import sakura from '../assets/sakura.mp3';
+import FlyingBird from '../models/FlyingBird';
+import FloatingFox from '../models/FloatingFox';
+import { EffectComposer, Bloom } from '@react-three/postprocessing';
+import music from '../assets/Joe Hisaishi - Merry-Go-Round of Life (from Howl’s Moving Castle).mp3';
 import { soundoff, soundon } from '../assets/icons';
 
 const Home = () => {
   const [isRotating, setIsRotating] = useState(false);
   const [currentStage, setCurrentStage] = useState(1);
 
-  const audioRef = useRef(new Audio(sakura));
+  const audioRef = useRef(new Audio(music));
   audioRef.current.volume = 0.4;
   audioRef.current.loop = true;
 
@@ -62,22 +62,22 @@ const Home = () => {
     };
   }, []);
 
-  const adjustPlaneForScreenSize = () => {
+  const adjustFloatingFoxForScreenSize = () => {
     let screenScale, screenPosition;
 
     if (window.innerWidth < 768) {
-      screenScale = [1.5, 1.5, 1.5];
-      screenPosition = [0, -1.5, 0];
+      screenScale = [0.5, 0.5, 0.5];
+      screenPosition = [3, -5.8, -5];
     } else {
-      screenScale = [3, 3, 3];
-      screenPosition = [0, -2, -2];
+      screenScale = [0.8, 0.8, 0.8];
+      screenPosition = [3, -10, -3];
     }
 
     return [screenScale, screenPosition];
   };
 
+  const [foxScale, foxPosition] = adjustFloatingFoxForScreenSize();
   const [islandScale, islandPosition, islandRotation] = adjustIslandForScreenSize();
-  const [planeScale, planePosition] = adjustPlaneForScreenSize();
 
   return (
     <section className="w-full h-screen relative">
@@ -91,25 +91,25 @@ const Home = () => {
         }`}
         camera={{ near: 0.1, far: 1000 }}
       >
+ <color attach="background" args={['#fdf6ff']} />
+         <EffectComposer>
+          <Bloom intensity={1.5} luminanceThreshold={0.1} luminanceSmoothing={0.9} height={300} />
+        </EffectComposer>
         <Suspense fallback={<Loader />}>
           <directionalLight position={[10, 1, 1]} intensity={2} />
           <ambientLight intensity={0.5} />
           <pointLight />
           <spotLight />
           <hemisphereLight skyColor="#b1e1ff" intensity={1} />
-
-          <Plane
+          <FloatingFox
             isRotating={isRotating}
-            planeScale={planeScale}
-            planePosition={planePosition}
-            rotation={[0, 20, 0]}
+            scale={foxScale}
+            position={foxPosition}
+            rotation={[0, 5.8, 0]}
           />
-          <Bird />
-          <SkyBox
-          isRotating={isRotating} 
-          scale={[1.5,1.5,1.5]}
+          <FlyingBird />
 
-          />
+          <SkyBox isRotating={isRotating} scale={[1.5, 1.5, 1.5]} />
           <LowpolyFox
             position={islandPosition}
             scale={islandScale}

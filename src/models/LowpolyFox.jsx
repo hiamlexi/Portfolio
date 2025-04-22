@@ -70,21 +70,21 @@ const LowpolyFox = ({ isRotating, setIsRotating, setCurrentStage,currentFocusPoi
 
     switch (true) {
       case normalizedRotation >= 5.6 || normalizedRotation <= 0.2:
-        setCurrentStage(1);
-        break;
-      case normalizedRotation >= 0.6 && normalizedRotation <= 1.2:
-        setCurrentStage(2);
-        break;
-      case normalizedRotation >= 2.0 && normalizedRotation <= 2.6:
-        setCurrentStage(3);
+        setCurrentStage(1); // Hi
         break;
       case normalizedRotation >= 3.8 && normalizedRotation <= 4.4:
-        setCurrentStage(4);
+        setCurrentStage(2); // About Me 
+        break;
+      case normalizedRotation >= 2.0 && normalizedRotation <= 2.6:
+        setCurrentStage(3); // Projects 
+        break;
+      case normalizedRotation >= 0.6 && normalizedRotation <= 1.2:
+        setCurrentStage(4); // Contact
         break;
       default:
         setCurrentStage(null);
     }
-
+    
     if (!isRotating) {
       rotationSpeed.current *= dampingFactor;
       if (Math.abs(rotationSpeed.current) < 0.001) {
