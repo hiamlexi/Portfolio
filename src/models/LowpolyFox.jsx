@@ -64,24 +64,29 @@ const LowpolyFox = ({ isRotating, setIsRotating, setCurrentStage, ...props }) =>
 
   useFrame(() => {
     const rotation = foxRef.current.rotation.y;
+    if (foxRef.current) {
+      console.log('Fox rotation Y:', foxRef.current.rotation.y);
+    }
+  
     const normalizedRotation = ((rotation % (2 * Math.PI)) + 2 * Math.PI) % (2 * Math.PI);
 
     switch (true) {
-      case normalizedRotation >= 5.45 && normalizedRotation <= 5.85:
-        setCurrentStage(4);
+      case normalizedRotation >= 5.6 || normalizedRotation <= 0.2:
+        setCurrentStage(1); // intro
         break;
-      case normalizedRotation >= 0.85 && normalizedRotation <= 1.3:
-        setCurrentStage(3);
+      case normalizedRotation >= 0.6 && normalizedRotation <= 1.2:
+        setCurrentStage(2); // about
         break;
-      case normalizedRotation >= 2.4 && normalizedRotation <= 2.6:
-        setCurrentStage(2);
+      case normalizedRotation >= 2.0 && normalizedRotation <= 2.6:
+        setCurrentStage(3); // projects
         break;
-      case normalizedRotation >= 4.25 && normalizedRotation <= 4.75:
-        setCurrentStage(1);
+      case normalizedRotation >= 3.8 && normalizedRotation <= 4.4:
+        setCurrentStage(4); // contact
         break;
       default:
         setCurrentStage(null);
     }
+    
 
     if (!isRotating) {
       rotationSpeed.current *= dampingFactor;

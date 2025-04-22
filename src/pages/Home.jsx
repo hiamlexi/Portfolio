@@ -2,9 +2,7 @@ import { Suspense, useRef, useState, useEffect } from 'react';
 import { Canvas } from '@react-three/fiber';
 import Loader from '../components/Loader';
 import HomeInfo from '../components/Homeinfo';
-//import Island from "../models/Island";
 import LowpolyFox from "../models/LowpolyFox";
-import { Sky } from '../models/Sky';
 import SkyBox from '../models/SkyBox';
 
 import Bird from '../models/Bird';
@@ -35,12 +33,12 @@ const Home = () => {
   const adjustIslandForScreenSize = () => {
     let screenScale = null;
     let screenPostion = [0, -6.5, -43];
-    let rotation = [0.1, 4.7, 0];
+    let rotation = [0, 5.8, 0];
 
     if (window.innerWidth < 768) {
-      screenScale = [0.9, 0.9, 0.9];
+      screenScale = [1.3, 1.3, 1.3];
     } else {
-      screenScale = [1, 1, 1];
+      screenScale = [1.7, 1.7, 1.7];
     }
 
     return [screenScale, screenPostion, rotation];
@@ -107,7 +105,11 @@ const Home = () => {
             rotation={[0, 20, 0]}
           />
           <Bird />
-          <SkyBox isRotating={isRotating} />
+          <SkyBox
+          isRotating={isRotating} 
+          scale={[1.5,1.5,1.5]}
+
+          />
           <LowpolyFox
             position={islandPosition}
             scale={islandScale}

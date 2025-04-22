@@ -8,22 +8,30 @@ Title: Skybox Clouds in the Sky spatial io
 
 import React, { useRef } from 'react'
 import { useGLTF } from '@react-three/drei'
+import { useFrame } from '@react-three/fiber'
 import skyBox from '../assets/3d/skybox.glb'
 
-export function SkyBox(props) {
+export function SkyBox({ isRotating }) {
+  const skyRef = useRef()
   const { nodes, materials } = useGLTF(skyBox)
+
+  useFrame((_, delta) => {
+    if (isRotating && skyRef.current) {
+      skyRef.current.rotation.y += 0.25 * delta
+    }
+  })
+
   return (
-    <group {...props} dispose={null}>
+    <group ref={skyRef} dispose={null}>
       <mesh
         castShadow
         receiveShadow
         geometry={nodes.Object_4.geometry}
         material={materials.Skybox_mat}
-        rotation={[Math.PI / 2, 0, 0]}
       />
     </group>
   )
 }
 
 useGLTF.preload('/skybox.glb')
-export default SkyBox;
+export default SkyBox
