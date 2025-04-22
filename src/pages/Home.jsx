@@ -2,7 +2,8 @@ import { Suspense, useRef, useState,useEffect } from "react";
 import { Canvas } from "@react-three/fiber";
 import Loader from "../components/Loader";
 import HomeInfo from "../components/Homeinfo";
-import Island from "../models/Island";
+//import Island from "../models/Island";
+import LowpolyFox from "../models/LowpolyFox";
 import { Sky } from "../models/Sky";
 import Bird from "../models/Bird";
 import Plane from "../models/Plane";
@@ -107,14 +108,15 @@ const Home = () => {
           />
           <Bird />
           <Sky isRotating={isRotating} />
-          <Island
-            position={islandPosition}
-            scale={islandScale}
-            rotation={islandRotation}
-            isRotating={isRotating}
-            setCurrentStage={setCurrentStage}
-            setIsRotating={setIsRotating}
-          />
+          <LowpolyFox
+  position={islandPosition}
+  scale={islandScale}
+  rotation={islandRotation}
+  isRotating={isRotating}
+  setIsRotating={setIsRotating}
+  setCurrentStage={setCurrentStage}
+/>
+
         </Suspense>
       </Canvas>
       <div className='absolute bottom-2 left-2'>
