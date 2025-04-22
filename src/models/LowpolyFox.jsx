@@ -9,11 +9,13 @@ Title: Lowpoly fox
 import React, { useRef, useEffect, useCallback } from 'react';
 import { useGLTF } from '@react-three/drei';
 import { useFrame, useThree } from '@react-three/fiber';
+import foxScene from '../assets/3d/lowpoly_fox.glb';
+import { a } from '@react-spring/three';
 
-const LowpolyFox = ({ isRotating, setIsRotating, setCurrentStage, ...props }) => {
+const LowpolyFox = ({ isRotating, setIsRotating, setCurrentStage,currentFocusPoint, ...props }) => {
   const foxRef = useRef();
   const { gl, viewport } = useThree();
-  const { nodes, materials } = useGLTF('/lowpoly_fox.glb');
+  const { nodes, materials } = useGLTF(foxScene);
 
   const lastX = useRef(0);
   const rotationSpeed = useRef(0);
@@ -64,29 +66,24 @@ const LowpolyFox = ({ isRotating, setIsRotating, setCurrentStage, ...props }) =>
 
   useFrame(() => {
     const rotation = foxRef.current.rotation.y;
-    if (foxRef.current) {
-      console.log('Fox rotation Y:', foxRef.current.rotation.y);
-    }
-  
     const normalizedRotation = ((rotation % (2 * Math.PI)) + 2 * Math.PI) % (2 * Math.PI);
 
     switch (true) {
       case normalizedRotation >= 5.6 || normalizedRotation <= 0.2:
-        setCurrentStage(1); // intro
+        setCurrentStage(1);
         break;
       case normalizedRotation >= 0.6 && normalizedRotation <= 1.2:
-        setCurrentStage(2); // about
+        setCurrentStage(2);
         break;
       case normalizedRotation >= 2.0 && normalizedRotation <= 2.6:
-        setCurrentStage(3); // projects
+        setCurrentStage(3);
         break;
       case normalizedRotation >= 3.8 && normalizedRotation <= 4.4:
-        setCurrentStage(4); // contact
+        setCurrentStage(4);
         break;
       default:
         setCurrentStage(null);
     }
-    
 
     if (!isRotating) {
       rotationSpeed.current *= dampingFactor;
@@ -103,20 +100,26 @@ const LowpolyFox = ({ isRotating, setIsRotating, setCurrentStage, ...props }) =>
     canvas.addEventListener('pointerdown', handlePointerDown);
     canvas.addEventListener('pointerup', handlePointerUp);
     canvas.addEventListener('pointermove', handlePointerMove);
-    document.addEventListener('keydown', handleKeyDown);
-    document.addEventListener('keyup', handleKeyUp);
+    canvas.addEventListener('touchstart', handlePointerDown);
+    canvas.addEventListener('touchend', handlePointerUp);
+    canvas.addEventListener('touchmove', handlePointerMove);
+    window.addEventListener('keydown', handleKeyDown);
+    window.addEventListener('keyup', handleKeyUp);
 
     return () => {
       canvas.removeEventListener('pointerdown', handlePointerDown);
       canvas.removeEventListener('pointerup', handlePointerUp);
       canvas.removeEventListener('pointermove', handlePointerMove);
-      document.removeEventListener('keydown', handleKeyDown);
-      document.removeEventListener('keyup', handleKeyUp);
+      canvas.removeEventListener('touchstart', handlePointerDown);
+      canvas.removeEventListener('touchend', handlePointerUp);
+      canvas.removeEventListener('touchmove', handlePointerMove);
+      window.removeEventListener('keydown', handleKeyDown);
+      window.removeEventListener('keyup', handleKeyUp);
     };
   }, [gl, handlePointerDown, handlePointerUp, handlePointerMove, handleKeyDown, handleKeyUp]);
 
   return (
-    <group ref={foxRef} {...props} dispose={null}>
+    <a.group ref={foxRef} {...props}>
       <group rotation={[-Math.PI / 2, 0, 0]}>
         <mesh
           castShadow
@@ -168,8 +171,8 @@ const LowpolyFox = ({ isRotating, setIsRotating, setCurrentStage, ...props }) =>
           scale={9.607}
         />
       </group>
-    </group>
+    </a.group>
   );
-};
+}
 
 export default LowpolyFox;
