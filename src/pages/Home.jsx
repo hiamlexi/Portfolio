@@ -2,11 +2,11 @@ import { Suspense, useRef, useState, useEffect } from 'react';
 import { Canvas } from '@react-three/fiber';
 import Loader from '../components/Loader';
 import HomeInfo from '../components/Homeinfo';
-import LowpolyFox from "../models/LowpolyFox";
+import LowpolyFox from '../models/LowpolyFox';
 import SkyBox from '../models/SkyBox';
+import FlyingBird from '../models/FlyingBird';
+import FloatingFox from '../models/FloatingFox';
 
-import Bird from '../models/Bird';
-import Plane from '../models/Plane';
 import sakura from '../assets/sakura.mp3';
 import { soundoff, soundon } from '../assets/icons';
 
@@ -66,11 +66,11 @@ const Home = () => {
     let screenScale, screenPosition;
 
     if (window.innerWidth < 768) {
-      screenScale = [1.5, 1.5, 1.5];
-      screenPosition = [0, -1.5, 0];
+      screenScale = [0.5, 0.5, 0.5];
+      screenPosition = [3, -5.8, -5];
     } else {
-      screenScale = [3, 3, 3];
-      screenPosition = [0, -2, -2];
+      screenScale = [0.8, 0.8, 0.8];
+      screenPosition = [3, -10, -3 ];
     }
 
     return [screenScale, screenPosition];
@@ -97,19 +97,16 @@ const Home = () => {
           <pointLight />
           <spotLight />
           <hemisphereLight skyColor="#b1e1ff" intensity={1} />
-
-          <Plane
+          <FloatingFox
             isRotating={isRotating}
-            planeScale={planeScale}
-            planePosition={planePosition}
-            rotation={[0, 20, 0]}
+            scale={planeScale}
+            position={planePosition}
+            rotation={[0, 5.8, 0]}
           />
-          <Bird />
-          <SkyBox
-          isRotating={isRotating} 
-          scale={[1.5,1.5,1.5]}
 
-          />
+          <FlyingBird />
+
+          <SkyBox isRotating={isRotating} scale={[1.5, 1.5, 1.5]} />
           <LowpolyFox
             position={islandPosition}
             scale={islandScale}
