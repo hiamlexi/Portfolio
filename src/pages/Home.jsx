@@ -7,14 +7,14 @@ import SkyBox from '../models/SkyBox';
 import FlyingBird from '../models/FlyingBird';
 import FloatingFox from '../models/FloatingFox';
 
-import sakura from '../assets/sakura.mp3';
+import music from '../assets/Joe Hisaishi - Merry-Go-Round of Life (from Howl’s Moving Castle).mp3';
 import { soundoff, soundon } from '../assets/icons';
 
 const Home = () => {
   const [isRotating, setIsRotating] = useState(false);
   const [currentStage, setCurrentStage] = useState(1);
 
-  const audioRef = useRef(new Audio(sakura));
+  const audioRef = useRef(new Audio(music));
   audioRef.current.volume = 0.4;
   audioRef.current.loop = true;
 
@@ -62,7 +62,7 @@ const Home = () => {
     };
   }, []);
 
-  const adjustPlaneForScreenSize = () => {
+  const adjustFloatingFoxForScreenSize = () => {
     let screenScale, screenPosition;
 
     if (window.innerWidth < 768) {
@@ -70,14 +70,14 @@ const Home = () => {
       screenPosition = [3, -5.8, -5];
     } else {
       screenScale = [0.8, 0.8, 0.8];
-      screenPosition = [3, -10, -3 ];
+      screenPosition = [3, -10, -3];
     }
 
     return [screenScale, screenPosition];
   };
 
+  const [foxScale, foxPosition] = adjustFloatingFoxForScreenSize();
   const [islandScale, islandPosition, islandRotation] = adjustIslandForScreenSize();
-  const [planeScale, planePosition] = adjustPlaneForScreenSize();
 
   return (
     <section className="w-full h-screen relative">
@@ -99,11 +99,10 @@ const Home = () => {
           <hemisphereLight skyColor="#b1e1ff" intensity={1} />
           <FloatingFox
             isRotating={isRotating}
-            scale={planeScale}
-            position={planePosition}
+            scale={foxScale}
+            position={foxPosition}
             rotation={[0, 5.8, 0]}
           />
-
           <FlyingBird />
 
           <SkyBox isRotating={isRotating} scale={[1.5, 1.5, 1.5]} />
