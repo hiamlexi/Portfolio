@@ -1,14 +1,16 @@
-import { Suspense, useRef, useState,useEffect } from "react";
-import { Canvas } from "@react-three/fiber";
-import Loader from "../components/Loader";
-import HomeInfo from "../components/Homeinfo";
+import { Suspense, useRef, useState, useEffect } from 'react';
+import { Canvas } from '@react-three/fiber';
+import Loader from '../components/Loader';
+import HomeInfo from '../components/Homeinfo';
 //import Island from "../models/Island";
 import LowpolyFox from "../models/LowpolyFox";
-import { Sky } from "../models/Sky";
-import Bird from "../models/Bird";
-import Plane from "../models/Plane";
-import sakura from "../assets/sakura.mp3";
-import { soundoff, soundon } from "../assets/icons";
+import { Sky } from '../models/Sky';
+import SkyBox from '../models/SkyBox';
+
+import Bird from '../models/Bird';
+import Plane from '../models/Plane';
+import sakura from '../assets/sakura.mp3';
+import { soundoff, soundon } from '../assets/icons';
 
 const Home = () => {
   const [isRotating, setIsRotating] = useState(false);
@@ -29,7 +31,6 @@ const Home = () => {
       audioRef.current.pause();
     };
   }, [isPlayingMusic]);
-
 
   const adjustIslandForScreenSize = () => {
     let screenScale = null;
@@ -55,14 +56,14 @@ const Home = () => {
         console.warn('Autoplay blocked or failed:', err);
       }
     };
-  
+
     document.addEventListener('click', handleFirstClick);
-  
+
     return () => {
       document.removeEventListener('click', handleFirstClick);
     };
   }, []);
-  
+
   const adjustPlaneForScreenSize = () => {
     let screenScale, screenPosition;
 
@@ -77,8 +78,7 @@ const Home = () => {
     return [screenScale, screenPosition];
   };
 
-  const [islandScale, islandPosition, islandRotation] =
-    adjustIslandForScreenSize();
+  const [islandScale, islandPosition, islandRotation] = adjustIslandForScreenSize();
   const [planeScale, planePosition] = adjustPlaneForScreenSize();
 
   return (
@@ -89,7 +89,7 @@ const Home = () => {
 
       <Canvas
         className={`w-full h-screen bg-transparent ${
-          isRotating ? "cursor-grabbing" : "cursor-grab"
+          isRotating ? 'cursor-grabbing' : 'cursor-grab'
         }`}
         camera={{ near: 0.1, far: 1000 }}
       >
@@ -107,24 +107,23 @@ const Home = () => {
             rotation={[0, 20, 0]}
           />
           <Bird />
-          <Sky isRotating={isRotating} />
+          <SkyBox isRotating={isRotating} />
           <LowpolyFox
-  position={islandPosition}
-  scale={islandScale}
-  rotation={islandRotation}
-  isRotating={isRotating}
-  setIsRotating={setIsRotating}
-  setCurrentStage={setCurrentStage}
-/>
-
+            position={islandPosition}
+            scale={islandScale}
+            rotation={islandRotation}
+            isRotating={isRotating}
+            setIsRotating={setIsRotating}
+            setCurrentStage={setCurrentStage}
+          />
         </Suspense>
       </Canvas>
-      <div className='absolute bottom-2 left-2'>
+      <div className="absolute bottom-2 left-2">
         <img
           src={!isPlayingMusic ? soundoff : soundon}
-          alt='jukebox'
+          alt="jukebox"
           onClick={() => setIsPlayingMusic(!isPlayingMusic)}
-          className='w-10 h-10 cursor-pointer object-contain'
+          className="w-10 h-10 cursor-pointer object-contain"
         />
       </div>
     </section>
