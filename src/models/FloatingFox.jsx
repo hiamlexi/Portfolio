@@ -10,6 +10,7 @@ import React, { useEffect,useRef } from 'react'
 import { useGLTF, useAnimations } from '@react-three/drei'
 import floatingFox from '../assets/3d/floating_fox.glb';
 import { useFrame } from '@react-three/fiber';
+import * as THREE from 'three';
 
 
 const FloatingFox =({isRotating, ...props}) => {
@@ -23,14 +24,23 @@ const FloatingFox =({isRotating, ...props}) => {
         if (firstAnim && actions[firstAnim]) {
           actions[firstAnim].play();
         }
+
+        Object.values(materials).forEach((mat) => {
+            if (mat && mat.isMeshStandardMaterial) {
+              mat.emissiveIntensity = 0.05;
+              mat.metalness = 0.05;
+              mat.roughness = 0.05;
+            }
+          });
       
         return () => {
           if (firstAnim && actions[firstAnim]) {
             actions[firstAnim].stop();
           }
         };
-      }, [animations, actions]);
+      }, [animations, actions, materials]);
   
+      
     useFrame(({ clock }) => {
         
       if (group.current) {
