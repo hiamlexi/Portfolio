@@ -13,7 +13,7 @@ try {
 
   projects = privateData.projects.map(p => ({
     ...p,
-    iconUrl: sharedAssets.icons[p.iconKey]
+    iconUrl: sharedAssets.icons[p.iconUrl], 
   }));
 
 } catch (e) {

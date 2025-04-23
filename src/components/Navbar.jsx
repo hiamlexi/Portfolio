@@ -15,7 +15,7 @@ const Navbar = () => {
           to="/about"
           className={({ isActive }) => (isActive ? ' text-blue-500' : ' text-black')}
         >
-          About
+          About Me
         </NavLink>
         <NavLink
           to="/projects"
@@ -27,7 +27,7 @@ const Navbar = () => {
           to="/contact"
           className={({ isActive }) => (isActive ? ' text-blue-500' : ' text-black')}
         >
-          Contact
+          Contact Me
         </NavLink>
       </nav>
     </header>
