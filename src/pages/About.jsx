@@ -2,7 +2,8 @@ import { VerticalTimeline, VerticalTimelineElement } from 'react-vertical-timeli
 
 import CTA from '../components/CTA';
 import { experiences, skills } from '../constants';
-
+import styles from "../components/Hero.module.css";
+import character from "../assets/images/myImage.png"
 import 'react-vertical-timeline-component/style.min.css';
 
 const About = () => {
@@ -12,19 +13,28 @@ const About = () => {
         Hey, I'm <span className="blue-gradient_text font-semibold drop-shadow">Linh Pham</span> 👋
       </h1>
 
-      <div className="mt-5 flex flex-col gap-3 text-slate-500">
-        <p>
-          Software Engineer based in Sweden.🚀🚀🚀 I just really like building things that feel good
-          to use whether it’s a snappy web app, a chill automation, or a side project that spiraled
-          out of control.
-          <br />
-          Let’s make something absurdly great together. 🚀
-        </p>
+      <div className="mt-5 flex flex-col lg:flex-row gap-8 items-center justify-between text-slate-500">
+        <div className="flex-1">
+          <p>
+            Software Engineer based in Sweden. 🚀🚀🚀 I just really like building things that feel good
+            to use — whether it’s a snappy web app, a chill automation, or a side project that spiraled
+            out of control.
+            <br />
+            Let’s make something absurdly great together. 🚀
+          </p>
+        </div>
+
+        <div className="flex-1 flex justify-center lg:justify-end">
+          <img
+            src={character}
+            alt="Hero image of me"
+            className={styles.heroImg}
+          />
+        </div>
       </div>
 
       <div className="py-10 flex flex-col">
         <h3 className="subhead-text">My Skills</h3>
-
         <div className="mt-16 flex flex-wrap gap-12">
           {skills.map(skill => (
             <div className="block-container w-20 h-20 relative group" key={skill.name}>
@@ -32,7 +42,6 @@ const About = () => {
               <div className="btn-front rounded-xl flex justify-center items-center">
                 <img src={skill.imageUrl} alt={skill.name} className="w-1/2 h-1/2 object-contain" />
               </div>
-              {/* Hover label */}
               <div
                 className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 
                         bg-black text-white text-xs px-2 py-1 rounded 
@@ -43,6 +52,11 @@ const About = () => {
               </div>
             </div>
           ))}
+          <img
+            src={(character)}
+            alt="Hero image of me"
+            className={styles.heroImg}
+          />
         </div>
       </div>
 
