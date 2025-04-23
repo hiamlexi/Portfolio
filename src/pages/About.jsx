@@ -1,10 +1,14 @@
+import { Suspense } from 'react';
+import { Canvas } from '@react-three/fiber';
 import { VerticalTimeline, VerticalTimelineElement } from 'react-vertical-timeline-component';
 
 import CTA from '../components/CTA';
 import { experiences, skills } from '../constants';
 import styles from "../components/Hero.module.css";
-import character from "../assets/images/myImage.png"
+import character from "../assets/images/myImage.png";
 import 'react-vertical-timeline-component/style.min.css';
+import { Fox } from '../models/Fox';
+import Loader from '../components/Loader';
 
 const About = () => {
   return (
@@ -14,8 +18,8 @@ const About = () => {
       </h1>
 
       <div className="mt-5 flex flex-col lg:flex-row gap-8 items-center justify-between text-slate-500">
-        <div className="flex-1">
-          <p>
+      <div className="flex-2 text-xl leading-relaxed">
+      <p>
             Software Engineer based in Sweden. 🚀🚀🚀 I just really like building things that feel good
             to use — whether it’s a snappy web app, a chill automation, or a side project that spiraled
             out of control.
@@ -23,13 +27,30 @@ const About = () => {
             Let’s make something absurdly great together. 🚀
           </p>
         </div>
+        {/* Canvas Section */}
+        <div className="flex-1 h-[300px] md:h-[400px] lg:h-[500px]">
+        <Canvas
+            camera={{
+              position: [0, 0, 5],
+              fov: 75,
+              near: 0.1,
+              far: 1000,
+            }}
+          >
+            <directionalLight position={[0, 0, 1]} intensity={2.5} />
+            <ambientLight intensity={1} />
+            <pointLight position={[5, 10, 0]} intensity={2} />
+            <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} intensity={2} />
 
-        <div className="flex-1 flex justify-center lg:justify-end">
-          <img
-            src={character}
-            alt="Hero image of me"
-            className={styles.heroImg}
-          />
+            <Suspense fallback={<Loader />}>
+              <Fox
+                currentAnimation="idle"
+                position={[0.5, 0.35, 0]}
+                rotation={[12.629, -0.6, 0]}
+                scale={[0.5, 0.5, 0.5]}
+              />
+            </Suspense>
+          </Canvas>
         </div>
       </div>
 
@@ -52,11 +73,13 @@ const About = () => {
               </div>
             </div>
           ))}
-          <img
-            src={(character)}
-            alt="Hero image of me"
-            className={styles.heroImg}
-          />
+        </div>
+        <div className="mt-10 flex justify-center">
+    <img
+      src={character}
+      alt="Hero image of me"
+      className={styles.heroImg}
+    />
         </div>
       </div>
 
@@ -68,7 +91,7 @@ const About = () => {
 
         <div className="mt-12 flex">
           <VerticalTimeline>
-            {experiences.map((experience, index) => (
+            {experiences.map((experience) => (
               <VerticalTimelineElement
                 key={experience.company_name}
                 date={experience.date}
