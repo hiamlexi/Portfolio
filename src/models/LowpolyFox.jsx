@@ -14,9 +14,9 @@ import { a } from '@react-spring/three';
 
 const LowpolyFox = ({ isRotating, setIsRotating, setCurrentStage,currentFocusPoint, ...props }) => {
   const foxRef = useRef();
-  const { gl, viewport } = useThree();
+  const { camera,gl, viewport } = useThree();
   const { nodes, materials } = useGLTF(foxScene);
-
+  const zoomRef = useRef(20);
   const lastX = useRef(0);
   const rotationSpeed = useRef(0);
   const dampingFactor = 0.95;
@@ -64,6 +64,12 @@ const LowpolyFox = ({ isRotating, setIsRotating, setCurrentStage,currentFocusPoi
     }
   }, [setIsRotating]);
 
+  const handleWheel = useCallback((e) => {
+    zoomRef.current += e.deltaY * 0.01; // smooth scroll
+    zoomRef.current = Math.min(Math.max(zoomRef.current, 1), 30); // clamp zoom
+    camera.position.z = zoomRef.current;
+  }, [gl]);
+  
   useFrame(() => {
     const rotation = foxRef.current.rotation.y;
     const normalizedRotation = ((rotation % (2 * Math.PI)) + 2 * Math.PI) % (2 * Math.PI);
@@ -105,6 +111,8 @@ const LowpolyFox = ({ isRotating, setIsRotating, setCurrentStage,currentFocusPoi
     canvas.addEventListener('touchmove', handlePointerMove);
     window.addEventListener('keydown', handleKeyDown);
     window.addEventListener('keyup', handleKeyUp);
+    window.addEventListener('wheel', handleWheel, { passive: false });
+
 
     return () => {
       canvas.removeEventListener('pointerdown', handlePointerDown);
@@ -115,8 +123,10 @@ const LowpolyFox = ({ isRotating, setIsRotating, setCurrentStage,currentFocusPoi
       canvas.removeEventListener('touchmove', handlePointerMove);
       window.removeEventListener('keydown', handleKeyDown);
       window.removeEventListener('keyup', handleKeyUp);
+      window.removeEventListener('wheel', handleWheel);
+
     };
-  }, [gl, handlePointerDown, handlePointerUp, handlePointerMove, handleKeyDown, handleKeyUp]);
+  }, [gl, handlePointerDown, handlePointerUp, handlePointerMove, handleKeyDown, handleKeyUp,handleWheel]);
 
   return (
     <a.group ref={foxRef} {...props}>
