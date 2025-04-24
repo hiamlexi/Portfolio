@@ -22,8 +22,8 @@ import {
       iconBg: "#cccccc",
       date: "Jan 2020 – Dec 2021",
       points: [
-        "Did something impactful",
-        "Led a project of note",
+        "Hi",
+        "This is a dummy file",
         "Collaborated with amazing people",
       ],
     },
@@ -34,8 +34,8 @@ import {
       iconBg: "#dddddd",
       date: "2022",
       points: [
-        "Built cool stuff",
-        "Contributed to growth",
+        "also dummy data here",
+        ".....",
         "Presented at internal meetups",
       ],
     },
@@ -59,14 +59,14 @@ import {
       iconUrl: python,
       theme: "btn-back-red",
       name: "Project A",
-      description: "A placeholder description for Project A.",
+      description: "A placeholder .",
       link: "https://github.com/example/project-a",
     },
     {
       iconUrl: javascript,
       theme: "btn-back-pink",
       name: "Project B",
-      description: "Another cool project.",
+      description: "placeholder for a cool project.",
       link: "https://github.com/example/project-b",
     },
   ];
