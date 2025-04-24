@@ -18,18 +18,27 @@ const About = () => {
       </h1>
 
       <div className="mt-5 flex flex-col lg:flex-row gap-8 items-center justify-between text-slate-500">
-      <div className="flex-2 text-xl leading-relaxed">
-      <p>
+        <div className="flex-2 text-xl leading-relaxed">
+          <p>
             Software Engineer based in Sweden. 🚀🚀🚀 I just really like building things that feel good
             to use — whether it’s a snappy web app, a chill automation, or a side project that spiraled
             out of control.
             <br />
-            Let’s make something absurdly great together. 🚀
+            Let’s make something absurdly great together. 🚀            <br />
+
+            <a
+              href="https://www.linkedin.com/in/linhpham404/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-blue-500 underline hover:text-blue-700"
+            >
+              Connect with me on LinkedIn
+            </a>
           </p>
         </div>
         {/* Canvas Section */}
         <div className="flex-1 h-[300px] md:h-[400px] lg:h-[500px]">
-        <Canvas
+          <Canvas
             camera={{
               position: [0, 0, 5],
               fov: 75,
@@ -75,11 +84,11 @@ const About = () => {
           ))}
         </div>
         <div className="mt-10 flex justify-center">
-    <img
-      src={character}
-      alt="Hero image of me"
-      className={styles.heroImg}
-    />
+          <img
+            src={character}
+            alt="Hero image of me"
+            className={styles.heroImg}
+          />
         </div>
       </div>
 
