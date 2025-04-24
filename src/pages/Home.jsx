@@ -86,13 +86,12 @@ const Home = () => {
       </div>
 
       <Canvas
-        className={`w-full h-screen bg-transparent ${
-          isRotating ? 'cursor-grabbing' : 'cursor-grab'
-        }`}
+        className={`w-full h-screen bg-transparent ${isRotating ? 'cursor-grabbing' : 'cursor-grab'
+          }`}
         camera={{ near: 0.1, far: 1000 }}
       >
- <color attach="background" args={['#fdf6ff']} />
-         <EffectComposer>
+        <color attach="background" args={['#fdf6ff']} />
+        <EffectComposer>
           <Bloom intensity={1.5} luminanceThreshold={0.1} luminanceSmoothing={0.9} height={300} />
         </EffectComposer>
         <Suspense fallback={<Loader />}>

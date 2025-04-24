@@ -19,6 +19,7 @@ export function Fox({ currentAnimation, ...props }) {
     }
   }, [actions, currentAnimation]);
 
+  
   return (
     <group ref={group} {...props} dispose={null}>
       <group name='Sketchfab_Scene'>
