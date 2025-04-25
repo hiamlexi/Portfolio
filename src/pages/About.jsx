@@ -1,31 +1,23 @@
-import { Suspense } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 import { Canvas } from '@react-three/fiber';
-import { VerticalTimeline, VerticalTimelineElement } from 'react-vertical-timeline-component';
-import { useEffect, useState } from "react";
-
 import CTA from '../components/CTA';
-import { skills } from '../constants/publicData';
-
-import { loadExperienceAndProjects } from '../constants';
-import styles from "../components/Hero.module.css";
-import character from "../assets/images/myImage.png";
-import 'react-vertical-timeline-component/style.min.css';
-import { Fox } from '../models/Fox';
 import Loader from '../components/Loader';
-
-
+import { Fox } from '../models/Fox';
+import { VerticalTimeline, VerticalTimelineElement } from 'react-vertical-timeline-component';
+import 'react-vertical-timeline-component/style.min.css';
+import character from '../assets/images/myImage.png';
+import styles from '../components/Hero.module.css';
+import { skills } from '../constants/publicData';
+import { loadExperienceAndProjects } from '../constants/loader';
 
 const About = () => {
-
   const [experiences, setExperiences] = useState([]);
-const [projects, setProjects] = useState([]);
 
-useEffect(() => {
-  loadExperienceAndProjects().then((data) => {
-    setExperiences(data.experiences);
-    setProjects(data.projects);
-  });
-}, []);
+  useEffect(() => {
+    loadExperienceAndProjects().then(({ experiences }) => {
+      setExperiences(experiences);
+    });
+  }, []);
 
   return (
     <section className="max-container">
@@ -36,12 +28,11 @@ useEffect(() => {
       <div className="mt-5 flex flex-col lg:flex-row gap-8 items-center justify-between text-slate-500">
         <div className="flex-2 text-xl leading-relaxed">
           <p>
-            Software Engineer based in Sweden. 🚀🚀🚀 I just really like building things that feel good
-            to use — whether it’s a snappy web app, a chill automation, or a side project that spiraled
-            out of control.
+            Software Engineer based in Sweden. 🚀🚀🚀 I just really like building things that feel
+            good to use — whether it’s a snappy web app, a chill automation, or a side project that
+            spiraled out of control.
             <br />
-            Let’s make something absurdly great together. 🚀            <br />
-
+            Let’s make something absurdly great together. 🚀 <br />
             <a
               href="https://www.linkedin.com/in/linhpham404/"
               target="_blank"
@@ -100,11 +91,7 @@ useEffect(() => {
           ))}
         </div>
         <div className="mt-10 flex justify-center">
-          <img
-            src={character}
-            alt="Hero image of me"
-            className={styles.heroImg}
-          />
+          <img src={character} alt="Hero image of me" className={styles.heroImg} />
         </div>
       </div>
 
@@ -116,7 +103,7 @@ useEffect(() => {
 
         <div className="mt-12 flex">
           <VerticalTimeline>
-            {experiences.map((experience) => (
+            {experiences.map(experience => (
               <VerticalTimelineElement
                 key={experience.company_name}
                 date={experience.date}

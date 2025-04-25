@@ -2,14 +2,13 @@ import { Link } from "react-router-dom";
 import CTA  from "../components/CTA";
 import { arrow } from "../assets/icons";
 import { useEffect, useState } from "react";
-import { loadExperienceAndProjects } from '../constants';
+import { loadExperienceAndProjects } from '../constants/loader';
 
 
 const Projects = () => {
 
   
   const [projects, setProjects] = useState([]);
-  
   useEffect(() => {
     loadExperienceAndProjects().then((data) => {
       setProjects(data.projects);
