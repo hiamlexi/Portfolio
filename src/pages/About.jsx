@@ -1,16 +1,32 @@
 import { Suspense } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { VerticalTimeline, VerticalTimelineElement } from 'react-vertical-timeline-component';
+import { useEffect, useState } from "react";
 
 import CTA from '../components/CTA';
-import { experiences, skills } from '../constants';
+import { skills } from '../constants/publicData';
+
+import { loadExperienceAndProjects } from '../constants';
 import styles from "../components/Hero.module.css";
 import character from "../assets/images/myImage.png";
 import 'react-vertical-timeline-component/style.min.css';
 import { Fox } from '../models/Fox';
 import Loader from '../components/Loader';
 
+
+
 const About = () => {
+
+  const [experiences, setExperiences] = useState([]);
+const [projects, setProjects] = useState([]);
+
+useEffect(() => {
+  loadExperienceAndProjects().then((data) => {
+    setExperiences(data.experiences);
+    setProjects(data.projects);
+  });
+}, []);
+
   return (
     <section className="max-container">
       <h1 className="head-text">

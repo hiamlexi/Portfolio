@@ -1,9 +1,21 @@
 import { Link } from "react-router-dom";
 import CTA  from "../components/CTA";
-import { projects } from "../constants";
 import { arrow } from "../assets/icons";
+import { useEffect, useState } from "react";
+import { loadExperienceAndProjects } from '../constants';
+
 
 const Projects = () => {
+
+  
+  const [projects, setProjects] = useState([]);
+  
+  useEffect(() => {
+    loadExperienceAndProjects().then((data) => {
+      setProjects(data.projects);
+    });
+  }, []);
+  
   return (
     <section className='max-container'>
       <h1 className='head-text'>
