@@ -10,7 +10,6 @@ import React, { useEffect,useRef } from 'react'
 import { useGLTF, useAnimations } from '@react-three/drei'
 import floatingFox from '../assets/3d/floating_fox.glb';
 import { useFrame } from '@react-three/fiber';
-import * as THREE from 'three';
 
 
 const FloatingFox =({isRotating, ...props}) => {

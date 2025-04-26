@@ -56,14 +56,14 @@ import {
   
   export const projects = [
     {
-      iconUrl: python,
+      iconUrl: "python",
       theme: "btn-back-red",
       name: "Project A",
       description: "A placeholder .",
       link: "https://github.com/example/project-a",
     },
     {
-      iconUrl: javascript,
+      iconUrl: "javascript",
       theme: "btn-back-pink",
       name: "Project B",
       description: "placeholder for a cool project.",
