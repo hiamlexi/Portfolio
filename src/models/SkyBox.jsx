@@ -33,5 +33,4 @@ export function SkyBox({ isRotating }) {
   )
 }
 
-useGLTF.preload('/skybox.glb')
 export default SkyBox

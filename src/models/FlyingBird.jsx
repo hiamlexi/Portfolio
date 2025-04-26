@@ -217,5 +217,4 @@ const visibleWidth = 2 * Math.tan((camera.fov * Math.PI) / 360) * Math.abs(camer
   )
 }
 
-useGLTF.preload('/birds.glb')
 export default FlyingBird;
