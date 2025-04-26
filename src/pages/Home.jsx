@@ -6,7 +6,6 @@ import LowpolyFox from '../models/LowpolyFox';
 import SkyBox from '../models/SkyBox';
 import FlyingBird from '../models/FlyingBird';
 import FloatingFox from '../models/FloatingFox';
-import { EffectComposer, Bloom } from '@react-three/postprocessing';
 import music from '../assets/Joe Hisaishi - Merry-Go-Round of Life (from Howl’s Moving Castle).mp3';
 import { soundoff, soundon } from '../assets/icons';
 
@@ -91,9 +90,6 @@ const Home = () => {
         camera={{ near: 0.1, far: 1000 }}
       >
         <color attach="background" args={['#fdf6ff']} />
-        <EffectComposer>
-          <Bloom intensity={1.5} luminanceThreshold={0.1} luminanceSmoothing={0.9} height={300} />
-        </EffectComposer>
         <Suspense fallback={<Loader />}>
           <directionalLight position={[10, 1, 1]} intensity={2} />
           <ambientLight intensity={0.5} />
