@@ -13,19 +13,19 @@ const Navbar = () => {
       <nav className="flex text-lg gap-7 font-medium">
         <NavLink
           to="/about"
-          className={({ isActive }) => (isActive ? ' text-blue-500' : ' text-black')}
+          className={({ isActive }) => (isActive ? ' text-blue-500' : ' text-gray-300')}
         >
           About Me
         </NavLink>
         <NavLink
           to="/projects"
-          className={({ isActive }) => (isActive ? ' text-blue-500' : ' text-black')}
+          className={({ isActive }) => (isActive ? ' text-blue-500' : ' text-gray-300')}
         >
           Projects
         </NavLink>
         <NavLink
           to="/contact"
-          className={({ isActive }) => (isActive ? ' text-blue-500' : ' text-black')}
+          className={({ isActive }) => (isActive ? ' text-blue-500' : ' text-gray-300')}
         >
           Contact Me
         </NavLink>
