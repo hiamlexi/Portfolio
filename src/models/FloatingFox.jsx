@@ -138,5 +138,5 @@ const FloatingFox =({isRotating, ...props}) => {
   )
 }
 
-useGLTF.preload('/floating_fox.glb')
+
 export default FloatingFox
