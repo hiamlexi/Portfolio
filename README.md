@@ -1,12 +1,12 @@
 # Portfolio website
 
 This is my personal portfolio website built with **React**, **Three.js**, and **Tailwind CSS**.  
-It showcases my projects, experience, and skills through an interactive 3D homepage and clean design.
+It showcases my projects, experience, and skills through an interactive 3D homepage and clean design and how I handle the backend with private data, API call for bucket.
 
 ## ✨ Features
 
 - 3D animated homepage (interactive fox model)
--  Contact form powered by EmailJS
+- Handle requests
 - Responsive & mobile-friendly
 - Supports public/private content separation
 
@@ -20,9 +20,15 @@ It showcases my projects, experience, and skills through an interactive 3D homep
 ## 🛠️ Dev Setup
 
 ```bash
-npm install
+npm install --legacy-peer-deps
 npm run dev
 ```
+or
+```bash
+npm run build
+npm run dev
+```
+
 
 ## Plugin 
 Currently, two official plugins are available:
@@ -31,8 +37,4 @@ Currently, two official plugins are available:
 - [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
 ## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
-
-
 
