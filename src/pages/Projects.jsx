@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import CTA  from "../components/CTA";
+import CTA from "../components/CTA";
 import { arrow } from "../assets/icons";
 import { useEffect, useState } from "react";
 import { loadExperienceAndProjects } from '../constants/loader';
@@ -7,14 +7,14 @@ import { loadExperienceAndProjects } from '../constants/loader';
 
 const Projects = () => {
 
-  
+
   const [projects, setProjects] = useState([]);
   useEffect(() => {
     loadExperienceAndProjects().then((data) => {
       setProjects(data.projects);
     });
   }, []);
-  
+
   return (
     <section className='max-container'>
       <h1 className='head-text'>
@@ -25,16 +25,16 @@ const Projects = () => {
       </h1>
 
       <p className='text-slate-500 mt-2 leading-relaxed'>
-      Here’s a glimpse into some of the things I’ve crafted —
-       from full-stack apps to clever automations. 
-       Each project reflects my love for intuitive design, and solving problems.
-      Dive in and explore what I’ve been up to!
+        Here’s a glimpse into some of the things I’ve crafted —
+        from full-stack apps to clever automations.
+        Each project reflects my love for intuitive design, and solving problems.
+        Dive in and explore what I’ve been up to!
 
 
       </p>
 
       <div className='flex flex-wrap my-20 gap-16'>
-        {projects.map((project) => (
+        {projects.map((project, index) => (
           <div className='lg:w-[400px] w-full' key={project.name}>
             <div className='block-container w-12 h-12'>
               <div className={`btn-back rounded-xl ${project.theme}`} />
@@ -59,13 +59,25 @@ const Projects = () => {
                   rel='noopener noreferrer'
                   className='font-semibold text-blue-600'
                 >
-                  Live Link
+                  Link
                 </Link>
                 <img
                   src={arrow}
                   alt='arrow'
                   className='w-4 h-4 object-contain'
                 />
+                {index === 0 && project.link2 && (
+                  <div className='flex items-center gap-2'>
+                    <a
+                      href={project.link2}
+                      target='_blank'
+                      rel='noopener noreferrer'
+                      className='font-semibold text-blue-600'
+                    >
+                      New Repo
+                    </a>
+                  </div>
+                )}
               </div>
             </div>
           </div>

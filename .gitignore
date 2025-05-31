@@ -26,3 +26,4 @@ dist-ssr
 #data
 /src/constants/data.js
 .vercel
+data.json
