@@ -2,8 +2,6 @@
 import {
     contact,
     github,
-    javascript,
-    python,
   } from "../assets/icons";
   
   export const GitLink = [

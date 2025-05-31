@@ -1,30 +1,29 @@
 import { logos, sharedAssets } from './publicData.js';
 
+const BUCKET_URL = import.meta.env.VITE_API_BUCKET_URL;
+
 export const loadExperienceAndProjects = async () => {
-  const modules = import.meta.glob('./*.js');
-
   try {
-    const privateData = modules['./data.js']
-      ? await modules['./data.js']()
-      : null;
-
+  const res = await fetch(BUCKET_URL);
+    if (!res.ok) throw new Error('Bucket fetch failed');
+        const privateData = await res.json();
     if (privateData) {
-      return {
-        experiences: privateData.experiences.map((exp) => ({
-          ...exp,
-          icon: logos.icons[exp.iconKey],
-        })),
-        projects: privateData.projects.map((p) => ({
-          ...p,
-          iconUrl: sharedAssets.icons[p.iconUrl],
-        })),
-      };
-    }
+     return {
+      experiences: privateData.experiences.map((exp) => ({
+        ...exp,
+        icon: logos.icons[exp.iconKey],
+      })),
+      projects: privateData.projects.map((p) => ({
+        ...p,
+        iconUrl: sharedAssets.icons[p.iconUrl],
+      })),
+    };
+  }
   } catch (e) {
-    console.warn('Private data load failed. Falling back to dummy.');
+    console.error(e)
   }
 
-  // fallback
+  // fallback to dummy file
   const dummyData = await import('./dummyData.js');
   return {
     experiences: dummyData.experiences.map((exp) => ({
